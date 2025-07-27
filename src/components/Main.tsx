@@ -5,7 +5,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Main: React.FC<Props> = ({ children, className, ...rest }) => (
-  <main className={`text-center ${className ?? ""}`} {...rest}>
+  <main className={`m-8 text-center ${className ?? ""}`} {...rest}>
     {children}
   </main>
 );

@@ -1,22 +1,19 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
-import PWABadge from "./PWABadge.tsx";
+import { Provider } from "react-redux";
+
 import "./index.css";
-import LandingPage from "./pages/Landing.tsx";
-import Layout from "./components/Layout.tsx";
-import Study from "./pages/Study.tsx";
+
+import PWABadge from "./PWABadge.tsx";
+import store from "./store";
+
+import MainRouter from "./MainRouter.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Layout>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/study" element={<Study />} />
-        </Routes>
-        <PWABadge />
-      </BrowserRouter>
-    </Layout>
+    <Provider store={store}>
+      <MainRouter />
+    </Provider>
+    <PWABadge />
   </StrictMode>
 );

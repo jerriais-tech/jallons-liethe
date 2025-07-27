@@ -11,11 +11,18 @@
   },
   "dependencies": {
     "@austinshelby/simple-ts-fsrs": "npm:@jsr/austinshelby__simple-ts-fsrs@^2.0.2",
+    "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.11",
+    "@types/node": "^24.1.0",
+    "@types/pluralize": "^0.0.33",
+    "achilles-csv-parser": "^1.1.0",
+    "idb": "^8.0.3",
+    "js-md5": "^0.8.3",
+    "pluralize": "^8.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
     "react-router": "^7.7.0",
-    "swr": "^2.3.4",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

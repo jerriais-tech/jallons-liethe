@@ -1,47 +1,40 @@
-import React, { useCallback, useState } from "react";
-import H1 from "../components/H1";
-import Header from "../components/Header";
-import Main from "../components/Main";
-import Nav from "../components/Nav";
-import Card from "../components/Card";
-import NavButton from "../components/NavButton";
+import React, { useCallback } from "react";
+import { Rating } from "@austinshelby/simple-ts-fsrs";
+
+import { useDeckActions } from "@/store/deck";
+import { useDailyStats, useTodaysCards } from "@/store/deck/selectors";
+
+import H1 from "@/components/H1";
+import Header from "@/components/Header";
+import BackButton from "@/components/BackButton";
+import StudyCard from "@/components/StudyCard";
+import StudySuggestions from "@/components/StudySuggestions";
 
 const Study: React.FC = () => {
-  const [isRevealed, setIsRevealed] = useState(false);
+  const actions = useDeckActions();
+  const stats = useDailyStats();
+  const canStudyMore = stats.newCardsToday < stats.newCardsPerDay;
 
-  const handleClickReveal = useCallback(() => setIsRevealed(true), []);
+  const [card] = useTodaysCards();
+
+  const handleRating = useCallback(
+    (rating: Rating) => {
+      actions.rateCard({ card, rating, time: Date.now() });
+    },
+    [card]
+  );
 
   return (
     <>
-      <Header>
+      <Header back={<BackButton to="/" />}>
         <H1>Study</H1>
       </Header>
 
-      <Nav>
-        {isRevealed ? (
-          <>
-            <NavButton color="rose">Forgot</NavButton>
-            <NavButton color="orange">Struggled</NavButton>
-            <NavButton color="green" autoFocus>
-              Remembered
-            </NavButton>
-            <NavButton>Mastered</NavButton>
-          </>
-        ) : (
-          <NavButton onClick={handleClickReveal} autoFocus>
-            Reveal
-          </NavButton>
-        )}
-      </Nav>
-
-      <Main>
-        <Card
-          front="Bouônjour"
-          back="Hello"
-          revealed={isRevealed}
-          onClick={handleClickReveal}
-        />
-      </Main>
+      {card ? (
+        <StudyCard card={card} onRating={handleRating} />
+      ) : (
+        <>{canStudyMore ? <StudySuggestions /> : <></>}</>
+      )}
     </>
   );
 };

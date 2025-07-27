@@ -13,10 +13,13 @@ const LandingPage: React.FC = () => {
       </Header>
 
       <Nav>
-        <NavItem to="/study">Get started</NavItem>
+        <NavItem to="/study">Study now</NavItem>
+        <NavItem to="/courses">Browse courses</NavItem>
       </Nav>
 
-      <Main>Hello mate</Main>
+      <Main>
+        <h2>Learn the vocabulary you need to read Jèrriais literature</h2>
+      </Main>
     </>
   );
 };

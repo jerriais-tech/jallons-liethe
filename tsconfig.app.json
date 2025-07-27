@@ -22,7 +22,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
-      "@/*": ["src/*"] // Map '@/*' to 'src/*'
+      "@/*": ["./src/*"] // Map '@/*' to 'src/*'
     }
   },
   "include": ["src"]

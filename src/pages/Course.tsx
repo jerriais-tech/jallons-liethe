@@ -5,13 +5,12 @@ import H1 from "@/components/H1";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 import { useCourses } from "@/store/courses/selectors";
-import LessonCard from "@/components/LessonCard";
-import { useUserLessons } from "@/store/deck/selectors";
 import { Lesson } from "@/data/types";
 import Modal from "@/components/Modal";
 import { useDeckActions } from "@/store/deck";
 import BackButton from "@/components/BackButton";
 import H2 from "@/components/H2";
+import LessonList from "@/components/LessonList";
 
 const Course: React.FC = () => {
   const params = useParams();
@@ -20,8 +19,6 @@ const Course: React.FC = () => {
 
   const courseSlug = params.slug;
   const course = courses.find((course) => course.id === courseSlug);
-
-  const userLessons = useUserLessons();
 
   const [addingLesson, setAddingLesson] = useState<Lesson>();
   const handleAddingClose = useCallback(() => setAddingLesson(undefined), []);
@@ -52,19 +49,7 @@ const Course: React.FC = () => {
       <Main>
         <span className="italic text-gray-600">{course.subtitle}</span>
         <H2>Lessons</H2>
-        {course.lessons.map((lesson, index) => (
-          <LessonCard
-            key={index}
-            lesson={lesson}
-            learning={Boolean(
-              userLessons.find(
-                (value) =>
-                  value.course === lesson.courseId && value.lesson === lesson.id
-              )
-            )}
-            onClick={() => setAddingLesson(lesson)}
-          />
-        ))}
+        <LessonList lessons={course.lessons} onClick={setAddingLesson} />
       </Main>
 
       {addingLesson && (

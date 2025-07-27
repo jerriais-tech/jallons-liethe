@@ -137,11 +137,7 @@ export function getNextLessonSuggestions(
   courses: Course[],
   states: CourseStates
 ): LessonData[] {
-  const unfinishedCourses = Object.entries(states).filter(
-    ([, state]) => state.state !== "Review"
-  );
-
-  const nextLessons = unfinishedCourses.reduce(
+  const nextLessons = Object.entries(states).reduce(
     (nextLessons: LessonData[], [courseId, { lessons }]) => {
       // Find the course listing for this course state
       const course = courses.find((course) => course.id === courseId);
@@ -163,6 +159,7 @@ export function getNextLessonSuggestions(
           const lastFinishedLessonIndex = lessonsArray.findIndex(
             (lesson) => lesson.id === lastFinishedLesson[0]
           );
+
           if (lastFinishedLessonIndex > -1) {
             // Get all following lessons in the course
             const lessonsAfterFinished = lessonsArray.slice(

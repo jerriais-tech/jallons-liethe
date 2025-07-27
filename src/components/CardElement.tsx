@@ -9,7 +9,7 @@ const CardElement: React.FC<Props> = ({ children, onClick }) => {
   return (
     <article
       onClick={onClick}
-      className="shadow outline outline-black/5 rounded-lg flex text-left"
+      className="my-4 shadow outline outline-black/5 rounded-lg flex text-left"
     >
       {children}
     </article>

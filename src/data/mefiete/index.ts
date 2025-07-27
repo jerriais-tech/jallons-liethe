@@ -5,6 +5,8 @@ import coverImage from "./images/cover.jpg";
 
 import contnu from "./contnu.csv?raw";
 import contnuImage from "./images/contnu.jpg";
+import vioge from "./vioge.csv?raw";
+import viogeImage from "./images/vioge.jpg";
 
 const course: Course = {
   id: "mefiete",
@@ -18,6 +20,13 @@ const course: Course = {
       title: "Lé Cont'nu",
       vocabulary: parse(contnu),
       image: contnuImage,
+    },
+    {
+      id: "vioge",
+      courseId: "mefiete",
+      title: "Tchi qui d'meuthe à la Ruette à la Vioge?",
+      vocabulary: parse(vioge),
+      image: viogeImage,
     },
   ],
 };

@@ -1,4 +1,5 @@
 import { useDailyStats, useTodaysCards } from "@/store/deck/selectors";
+import pluralize from "pluralize";
 import React from "react";
 
 const Stats: React.FC = () => {
@@ -8,8 +9,10 @@ const Stats: React.FC = () => {
     <table className="stats-table w-full my-8 text-sm text-gray-600">
       <tbody>
         <tr>
-          <td>Scheduled cards:</td>
-          <td>{todaysCards.length}</td>
+          <td>Scheduled today:</td>
+          <td>
+            {todaysCards.length} {pluralize("card", todaysCards.length)}
+          </td>
         </tr>
         <tr>
           <td>Studied today:</td>

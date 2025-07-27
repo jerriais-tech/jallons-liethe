@@ -9,13 +9,32 @@ import CourseList from "@/components/CourseList";
 import FinishedStudying from "@/components/FinishedStudying";
 
 import {
+  useAllCards,
   useNextCourseSuggestions,
   useNextLessonSuggestions,
 } from "@/store/deck/selectors";
 
 const StudySuggestions: React.FC = () => {
+  const cards = useAllCards();
   const nextLessonSuggestions = useNextLessonSuggestions();
   const nextCourseSuggestions = useNextCourseSuggestions();
+
+  if (cards.length === 0) {
+    return (
+      <>
+        <Nav>
+          <NavItem to="/courses">Browse courses</NavItem>
+        </Nav>
+
+        <Main>
+          <P>
+            There are no cards in your study deck. Choose a course and lesson to
+            add to your deck.
+          </P>
+        </Main>
+      </>
+    );
+  }
 
   if (
     nextLessonSuggestions.length === 0 &&

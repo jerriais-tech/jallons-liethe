@@ -8,6 +8,7 @@ import {
   getNextLessonSuggestions,
   getScheduledCards,
   getTodaysCards,
+  getTodaysNewCards,
   getTodaysScheduledCards,
 } from "./helpers";
 import { selectCourses } from "../courses/selectors";
@@ -21,12 +22,15 @@ export const useDailyStats = () => useAppSelector(selectDailyStats);
 export const selectUserLessons = (state: RootState) => state.deck.lessons;
 export const useUserLessons = () => useAppSelector(selectUserLessons);
 
-export const selectNewCards = createSelector(
-  selectAllCards,
-  selectDailyStats,
-  getNewCards
-);
+export const selectNewCards = createSelector(selectAllCards, getNewCards);
 export const useNewCards = () => useAppSelector(selectNewCards);
+
+export const selectTodaysNewCards = createSelector(
+  selectNewCards,
+  selectDailyStats,
+  getTodaysNewCards
+);
+export const useTodaysNewCards = () => useAppSelector(selectTodaysNewCards);
 
 export const selectScheduledCards = createSelector(
   selectAllCards,
@@ -43,7 +47,7 @@ export const useTodaysScheduledCards = () =>
 
 export const selectTodaysCards = createSelector(
   selectTodaysScheduledCards,
-  selectNewCards,
+  selectTodaysNewCards,
   selectDailyStats,
   getTodaysCards
 );
@@ -56,6 +60,7 @@ export const selectCourseStates = createSelector(
 export const useCourseStates = () => useAppSelector(selectCourseStates);
 
 export const selectNextLessonSuggestions = createSelector(
+  selectCourses,
   selectCourseStates,
   getNextLessonSuggestions
 );

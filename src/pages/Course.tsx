@@ -41,7 +41,7 @@ const Course: React.FC = () => {
     }
     setAddingLesson(undefined);
     setAddedLesson(addingLesson);
-  }, [addingLesson]);
+  }, [addingLesson, actions]);
 
   return course ? (
     <>

@@ -13,6 +13,6 @@ export function useActions<A, M extends ActionCreatorsMapObject<A>>(
   const dispatch = useDispatch();
   return useMemo(
     () => bindActionCreators(actionCreators, dispatch),
-    [dispatch]
+    [dispatch, actionCreators]
   );
 }

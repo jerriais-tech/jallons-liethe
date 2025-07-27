@@ -1,11 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import counter from "./counterSlice";
 import courses from "./courses";
 import deck, { deckActions } from "./deck";
 
 const store = configureStore({
-  reducer: { counter, courses, deck },
+  reducer: { courses, deck },
 });
 
 const midnight = new Date();

@@ -3,7 +3,7 @@ export interface Lesson {
   courseId: string;
   title: string;
   image: string;
-  vocabulary: { jerriais: string; english: string }[];
+  vocabulary: { front: string; back: string }[];
 }
 
 export interface Course {

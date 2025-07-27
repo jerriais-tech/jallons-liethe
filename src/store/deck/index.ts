@@ -61,9 +61,9 @@ export const deckSlice = createSlice({
       state.lessons.unshift(lessonData);
 
       // Add card to deck
-      lesson.vocabulary.forEach(({ jerriais, english }) => {
+      lesson.vocabulary.forEach(({ front, back }) => {
         const existingCard = state.cards.find(
-          (value) => value.front === jerriais && value.back === english
+          (value) => value.front === front && value.back === back
         );
         if (existingCard) {
           const alreadyExists = existingCard.lessons.find((value) =>
@@ -73,11 +73,7 @@ export const deckSlice = createSlice({
             existingCard.lessons.push(lessonData);
           }
         } else {
-          state.cards.push({
-            front: jerriais,
-            back: english,
-            lessons: [lessonData],
-          });
+          state.cards.push({ front, back, lessons: [lessonData] });
         }
       });
     },

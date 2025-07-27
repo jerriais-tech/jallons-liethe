@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./index.css";
 
 interface Props {
-  front: React.ReactNode;
-  back: React.ReactNode;
+  front: string;
+  back: string;
   revealed?: boolean;
   onClick?: () => void;
 }
@@ -11,17 +11,22 @@ interface Props {
 const CARD_FLIP_DURATION = 0.25;
 
 const Card: React.FC<Props> = ({ front, back, revealed, onClick }) => {
-  const [newFront, setNewFront] = useState(back);
-  const [newBack, setNewBack] = useState(back);
+  const [previousRevealed, setPreviousRevealed] = useState(revealed);
+  const [backState, setBackState] = useState({ front, back });
+
   useEffect(() => {
-    if (!revealed) {
-      const timeout = setTimeout(() => {
-        setNewFront(front);
-        setNewBack(back);
-      }, CARD_FLIP_DURATION * 1000);
-      return () => clearTimeout(timeout);
+    if (revealed !== previousRevealed) {
+      if (revealed) {
+        setBackState({ front, back });
+      } else {
+        const timeout = setTimeout(() => {
+          setBackState({ front, back });
+        }, CARD_FLIP_DURATION * 1000);
+        return () => clearTimeout(timeout);
+      }
     }
-  }, [revealed]);
+    setPreviousRevealed(revealed);
+  }, [revealed, previousRevealed, front, back]);
 
   return (
     <div
@@ -37,9 +42,13 @@ const Card: React.FC<Props> = ({ front, back, revealed, onClick }) => {
         {front}
       </div>
       <div className="back shadow-lg ring w-full h-full absolute flex flex-col">
-        <div className="flex-grow flex flex-col justify-center">{newFront}</div>
+        <div className="flex-grow flex flex-col justify-center">
+          {backState.front}
+        </div>
         <hr className="h-px w-full flex-shrink bg-gray-200 border-0 dark:bg-gray-700" />
-        <div className="flex-grow flex flex-col justify-center">{newBack}</div>
+        <div className="flex-grow flex flex-col justify-center">
+          {backState.back}
+        </div>
       </div>
     </div>
   );

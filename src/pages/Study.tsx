@@ -21,7 +21,7 @@ const Study: React.FC = () => {
     (rating: Rating) => {
       actions.rateCard({ card, rating, time: Date.now() });
     },
-    [card]
+    [card, actions]
   );
 
   return (

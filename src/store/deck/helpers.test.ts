@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import {
   getNewCards,

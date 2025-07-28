@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/jallons-liethe",
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"), // Alias '@' to the 'src' directory

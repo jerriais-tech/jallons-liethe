@@ -8,7 +8,7 @@ import Course from "@/pages/Course.tsx";
 import Layout from "@/components/Layout";
 
 const MainRouter: React.FC = () => (
-  <BrowserRouter>
+  <BrowserRouter basename="/jallons-liethe">
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<LandingPage />} />

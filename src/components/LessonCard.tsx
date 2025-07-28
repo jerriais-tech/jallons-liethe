@@ -17,7 +17,12 @@ const LessonCard: React.FC<Props> = ({ lesson, learning, onClick }) => {
 
   return (
     <CardElement onClick={handleCardClick}>
-      <img src={lesson.image} className="w-auto h-[110px] outline-black/5" />
+      <img
+        src={lesson.image}
+        height="111"
+        width="74"
+        className="outline-black/5"
+      />
       <div className="m-2 ml-4 w-full flex flex-col justify-between">
         <header>
           <h2 className="text-lg">{lesson.title}</h2>

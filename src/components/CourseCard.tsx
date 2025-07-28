@@ -16,7 +16,12 @@ const CourseCard: React.FC<Props> = ({ slug, course }) => {
 
   return (
     <CardElement onClick={handleCardClick}>
-      <img src={course.image} className="w-auto h-[110px] outline-black/5" />
+      <img
+        src={course.image}
+        height="111"
+        width="74"
+        className="outline-black/5"
+      />
       <div className="m-2 ml-4 flex flex-col justify-between">
         <header>
           <h2 className="text-lg">

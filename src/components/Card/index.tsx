@@ -45,7 +45,7 @@ const Card: React.FC<Props> = ({ front, back, revealed, onClick }) => {
         <div className="flex-grow flex flex-col justify-center">
           {backState.front}
         </div>
-        <hr className="h-px w-full flex-shrink bg-gray-200 border-0 dark:bg-gray-700" />
+        <hr className="h-px w-full flex-shrink bg-gray-200 border-0" />
         <div className="flex-grow flex flex-col justify-center">
           {backState.back}
         </div>

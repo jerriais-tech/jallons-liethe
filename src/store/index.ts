@@ -1,10 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { rememberReducer, rememberEnhancer } from "redux-remember";
 
 import courses from "./courses";
 import deck, { deckActions } from "./deck";
 
 const store = configureStore({
-  reducer: { courses, deck },
+  reducer: rememberReducer({ courses, deck }),
+  enhancers: (getDefaultEnhancers) =>
+    getDefaultEnhancers().concat(
+      rememberEnhancer(window.localStorage, ["deck"])
+    ),
 });
 
 const midnight = new Date();

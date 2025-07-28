@@ -38,6 +38,17 @@ export const deckSlice = createSlice({
   name: "deck",
   initialState,
   reducers: {
+    reset: (state) => {
+      state.stats = {
+        today: 0,
+        reviewsPerDay: 100,
+        newCardsPerDay: 20,
+        reviewsToday: 0,
+        newCardsToday: 0,
+      };
+      state.cards = [];
+      state.lessons = [];
+    },
     updateStatsForTime: (state, action: PayloadAction<number>) => {
       const time = action.payload;
       if (time - state.stats.today > 24 * 60 * 60 * 1000) {

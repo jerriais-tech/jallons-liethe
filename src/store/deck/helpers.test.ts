@@ -295,9 +295,9 @@ describe("getTodaysScheduledCards", () => {
     "Due Today",
     MOCK_DATE.getTime() - 60000
   ); // Due one minute ago
-  const cardDueTonight = createAssessedCard(
-    "Due Tonight",
-    MIDNIGHT_TONIGHT - 1
+  const cardDueSoon = createAssessedCard(
+    "Due Soon",
+    MOCK_DATE.getTime() + 50 * 60 * 1000
   ); // Due 1ms before midnight
   const cardDueExactlyAtMidnight = createAssessedCard(
     "Due at Midnight",
@@ -312,22 +312,18 @@ describe("getTodaysScheduledCards", () => {
     const scheduledCards = [
       cardDueYesterday,
       cardDueThisMorning,
-      cardDueTonight,
+      cardDueSoon,
       cardDueTomorrow,
     ];
     const result = getTodaysScheduledCards(scheduledCards);
-    expect(result).toEqual([
-      cardDueYesterday,
-      cardDueThisMorning,
-      cardDueTonight,
-    ]);
+    expect(result).toEqual([cardDueYesterday, cardDueThisMorning, cardDueSoon]);
     expect(result.length).toBe(3);
   });
 
   it("should NOT include a card scheduled for exactly midnight tonight", () => {
-    const scheduledCards = [cardDueExactlyAtMidnight, cardDueTonight];
+    const scheduledCards = [cardDueExactlyAtMidnight, cardDueSoon];
     const result = getTodaysScheduledCards(scheduledCards);
-    expect(result).toEqual([cardDueTonight]);
+    expect(result).toEqual([cardDueSoon]);
     expect(result.length).toBe(1);
   });
 
@@ -367,7 +363,7 @@ describe("getTodaysCardsInternal", () => {
   // Time-mocking setup
   const MOCK_DATE = new Date("2023-10-27T12:00:00.000Z"); // Mock "now"
   // Per your request, making the urgent window easy to configure for tests
-  const URGENT_WINDOW_MS = 5 * 60 * 1000;
+  const URGENT_WINDOW_MS = 15 * 60 * 1000;
   const URGENCY_BOUNDARY = MOCK_DATE.getTime() - URGENT_WINDOW_MS;
 
   beforeEach(() => {

@@ -48,12 +48,10 @@ export function getScheduledCards(allCards: CardData[]): CardData[] {
 export function getTodaysScheduledCards(
   scheduledCards: CardData[]
 ): CardData[] {
-  const date = new Date();
-  date.setHours(24, 0, 0, 0);
-  const midnight = date.getTime();
+  const before = Date.now() + 60 * 60 * 1000;
   return scheduledCards.filter(
     (card) =>
-      card.assessment && card.assessment.nextScheduledAssessment < midnight
+      card.assessment && card.assessment.nextScheduledAssessment < before
   );
 }
 
@@ -66,7 +64,8 @@ export function getTodaysCardsInternal(Fuzzer: typeof StableFuzzer) {
     // Cards scheduled in the last 5 minues are probably ones the user
     // just Forgot and wants to practice, we should show them first,
     // then new cards, the the rest.
-    const five_minutes_ago = Date.now() - 5 * 60 * 1000;
+    const now = Date.now();
+    const fifteen_minutes_ago = now - 15 * 60 * 1000;
 
     const urgentCards: CardData[] = [];
     const otherCards: CardData[] = [];
@@ -74,7 +73,8 @@ export function getTodaysCardsInternal(Fuzzer: typeof StableFuzzer) {
     todaysScheduledCards.forEach((card) => {
       if (
         card.assessment &&
-        card.assessment.nextScheduledAssessment > five_minutes_ago
+        card.assessment.nextScheduledAssessment > fifteen_minutes_ago &&
+        card.assessment.nextScheduledAssessment <= now
       ) {
         urgentCards.push(card);
       } else {
@@ -82,9 +82,21 @@ export function getTodaysCardsInternal(Fuzzer: typeof StableFuzzer) {
       }
     });
 
+    // Randomise order of urgent cards
     const fuzzer = new Fuzzer();
     const fuzz = fuzzer.sort.bind(fuzzer);
     urgentCards.sort(fuzz);
+
+    // Limit the rest to the cards due earliest then randomise
+    otherCards.splice(
+      Math.max(
+        0,
+        stats.reviewsPerDay -
+          stats.reviewsToday -
+          urgentCards.length -
+          newCards.length
+      )
+    );
     otherCards.sort(fuzz);
 
     // Combine decks

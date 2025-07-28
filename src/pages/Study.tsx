@@ -9,11 +9,14 @@ import Header from "@/components/Header";
 import BackButton from "@/components/BackButton";
 import StudyCard from "@/components/StudyCard";
 import StudySuggestions from "@/components/StudySuggestions";
+import FinishedStudying from "@/components/FinishedStudying";
 
 const Study: React.FC = () => {
   const actions = useDeckActions();
   const stats = useDailyStats();
-  const canStudyMore = stats.newCardsToday < stats.newCardsPerDay;
+  const canStudyMore =
+    stats.newCardsToday < stats.newCardsPerDay &&
+    stats.reviewsToday < stats.reviewsPerDay;
 
   const [card] = useTodaysCards();
 
@@ -33,7 +36,7 @@ const Study: React.FC = () => {
       {card ? (
         <StudyCard card={card} onRating={handleRating} />
       ) : (
-        <>{canStudyMore ? <StudySuggestions /> : <></>}</>
+        <>{canStudyMore ? <StudySuggestions /> : <FinishedStudying />}</>
       )}
     </>
   );

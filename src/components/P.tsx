@@ -5,7 +5,7 @@ interface Props extends React.HTMLAttributes<HTMLParagraphElement> {
 }
 
 const P: React.FC<Props> = ({ children, className, ...rest }) => (
-  <p className={`mb-6 ${className ?? ""}`} {...rest}>
+  <p className={`my-6 ${className ?? ""}`} {...rest}>
     {children}
   </p>
 );

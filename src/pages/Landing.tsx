@@ -29,9 +29,9 @@ const LandingPage: React.FC = () => {
           <strong>lesson</strong> for an individual chapter.
         </P>
         <P>
-          Flashcards for all the words you need will be added to your personal{" "}
-          <strong>deck</strong>, which you can <strong>study</strong> a little
-          each day.
+          All the vocabulary you need will be added to your personal{" "}
+          <strong>deck</strong> of <strong>cards</strong>, which you can{" "}
+          <strong>study</strong> a little each day.
         </P>
       </Main>
     </>

@@ -10,7 +10,7 @@ export default defineConfig({
   base: "/jallons-liethe",
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src"), // Alias '@' to the 'src' directory
+      "@": resolve(__dirname, "src"),
     },
   },
   plugins: [
@@ -27,7 +27,6 @@ export default defineConfig({
 
       manifest: {
         name: "J'allons liéthe",
-        short_name: "jallons-liethe",
         description:
           "Learn the vocabulary you need to understand Jèrriais literature",
         theme_color: "#ffffff",
